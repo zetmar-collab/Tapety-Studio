@@ -5,6 +5,7 @@ $ScriptDir = Split-Path -Parent $PSScriptRoot
 $AppDir = Split-Path -Parent $ScriptDir
 $PortFile = Join-Path $ScriptDir "config.port"
 $LogFile = Join-Path $ScriptDir ".server.log"
+$ErrLogFile = Join-Path $ScriptDir ".server.err"
 $FirstUseFile = Join-Path $ScriptDir "PIERWSZE-URUCHOMIENIE.txt"
 $IconIco = Join-Path $AppDir "assets\icon.ico"
 $IconPng = Join-Path $AppDir "assets\icon-192.png"
@@ -74,27 +75,45 @@ function Start-AppServer {
 
     switch ($runtime) {
         "python" {
-            Start-Process -WindowStyle Minimized python "-m http.server $port --directory `"$AppDir`"" `
-                -RedirectStandardOutput $LogFile -RedirectStandardError $LogFile
+            Start-Process -WindowStyle Hidden -FilePath "python" `
+                -ArgumentList @("-m", "http.server", $port, "--directory", $AppDir) `
+                -WorkingDirectory $AppDir `
+                -RedirectStandardOutput $LogFile `
+                -RedirectStandardError $ErrLogFile | Out-Null
         }
         "py" {
-            Start-Process -WindowStyle Minimized py "-3 -m http.server $port --directory `"$AppDir`"" `
-                -RedirectStandardOutput $LogFile -RedirectStandardError $LogFile
+            Start-Process -WindowStyle Hidden -FilePath "py" `
+                -ArgumentList @("-3", "-m", "http.server", $port, "--directory", $AppDir) `
+                -WorkingDirectory $AppDir `
+                -RedirectStandardOutput $LogFile `
+                -RedirectStandardError $ErrLogFile | Out-Null
         }
         "node" {
-            Start-Process -WindowStyle Minimized npx "--yes serve `"$AppDir`" -l $port" `
-                -RedirectStandardOutput $LogFile -RedirectStandardError $LogFile
+            Start-Process -WindowStyle Hidden -FilePath "npx" `
+                -ArgumentList @("--yes", "serve", $AppDir, "-l", $port) `
+                -WorkingDirectory $AppDir `
+                -RedirectStandardOutput $LogFile `
+                -RedirectStandardError $ErrLogFile | Out-Null
         }
     }
 
-    Start-Sleep -Seconds 2
+    $ready = $false
+    for ($i = 0; $i -lt 8; $i++) {
+        Start-Sleep -Seconds 1
+        if (Test-ServerRunning) {
+            $ready = $true
+            break
+        }
+    }
 
-    if (Test-ServerRunning) {
+    if ($ready) {
         Write-Host "Serwer gotowy: $url" -ForegroundColor Green
         return $true
     }
 
-    Write-Host "BLAD: Serwer nie odpowiada. Sprawdz: $LogFile" -ForegroundColor Red
+    Write-Host "BLAD: Serwer nie odpowiada. Sprawdz logi:" -ForegroundColor Red
+    Write-Host "  $LogFile" -ForegroundColor Yellow
+    Write-Host "  $ErrLogFile" -ForegroundColor Yellow
     return $false
 }
 
