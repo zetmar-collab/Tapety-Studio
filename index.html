@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tapety Studio — 250 promptów do generowania tapet 16:9 i 9:16. Marek Zettel, Cyfrowy Przyjaciel.">
+  <meta name="theme-color" content="#0f4c81">
+  <meta name="author" content="Marek Zettel — Cyfrowy Przyjaciel">
+  <title>Tapety Studio — Marek Zettel | Cyfrowy Przyjaciel</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <img class="brand-icon" src="assets/icon-192.png" alt="Tapety Studio" width="64" height="64">
+        <div>
+          <h1>Tapety Studio — Marek Zettel</h1>
+          <p>Cyfrowy Przyjaciel · marka osobista · 250 gotowych promptów do tapet AI</p>
+        </div>
+      </div>
+
+      <p class="tagline">
+        Kopiuj prompty do generatorów grafiki, modyfikuj je jednym kliknięciem w wybranym modelu AI
+        i buduj własną bibliotekę tapet na desktop (16:9) oraz telefon (9:16).
+      </p>
+
+      <div id="install-banner" class="install-banner">
+        <span>Zainstaluj Tapety Studio jako aplikację PWA na swoim komputerze.</span>
+        <button id="install-btn" class="btn btn-ai" type="button">Zainstaluj aplikację</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="info-grid" aria-label="Informacje pomocnicze">
+      <article class="info-card">
+        <h2>PrompBase — zapisuj zmodyfikowane prompty</h2>
+        <p>
+          Po modyfikacji w AI możesz zapisać najlepsze wersje w darmowej aplikacji PrompBase.
+          Pobierz ją tutaj:
+          <a href="https://github.com/zetmar-collab/PrompBase-Python/releases/download/v2.4.0/PrompBase.exe" target="_blank" rel="noopener noreferrer">PrompBase.exe (Windows, v2.4.0)</a>.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Gemini — wymagane rozszerzenie Chrome</h2>
+        <p>
+          Przy modelu Gemini używamy rozszerzenia
+          <strong>Gemini URL Prompt</strong>, które wstawia prompt z parametru URL.
+          Zainstaluj je z Chrome Web Store:
+          <a href="https://chromewebstore.google.com/detail/gemini-url-prompt/kdbgjkfdooaiompgeckjbegnnccchmma" target="_blank" rel="noopener noreferrer">pobierz Gemini URL Prompt</a>.
+        </p>
+      </article>
+    </section>
+
+    <section class="toolbar" aria-label="Wyszukiwarka i filtry">
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">🔎</span>
+        <input id="search-input" type="search" placeholder="Szukaj promptów: anime, cyberpunk, gradient, natura..." autocomplete="off">
+      </div>
+
+      <div class="controls-row">
+        <div class="tabs" role="tablist" aria-label="Format tapety">
+          <button class="tab-btn active" data-tab="landscape_16_9" type="button" role="tab" aria-selected="true">16:9 Desktop</button>
+          <button class="tab-btn" data-tab="portrait_9_16" type="button" role="tab" aria-selected="false">9:16 Telefon</button>
+        </div>
+
+        <div id="stats" class="stats">Wczytywanie...</div>
+      </div>
+    </section>
+
+    <section id="prompt-list" class="prompt-list" aria-live="polite" aria-label="Lista promptów">
+      <div class="empty-state">Ładowanie promptów...</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      Tapety Studio · Marek Zettel · Cyfrowy Przyjaciel · PWA offline · 125 promptów 16:9 + 125 promptów 9:16
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="ai-model-modal" class="modal" hidden aria-hidden="true">
+    <div class="modal-backdrop" data-close-ai-modal></div>
+    <div class="modal-dialog modal-dialog--models" role="dialog" aria-modal="true" aria-labelledby="ai-model-title">
+      <header class="modal-header">
+        <div>
+          <h2 id="ai-model-title">Wybierz model AI</h2>
+          <p>Prompt zostanie wysłany z poleceniem modyfikacji</p>
+        </div>
+      </header>
+      <div class="modal-body">
+        <ul id="ai-model-list" class="ai-model-list"></ul>
+        <p class="modal-note">
+          Gemini wymaga rozszerzenia
+          <a href="https://chromewebstore.google.com/detail/gemini-url-prompt/kdbgjkfdooaiompgeckjbegnnccchmma" target="_blank" rel="noopener noreferrer">Gemini URL Prompt</a>.
+        </p>
+      </div>
+      <footer class="modal-footer">
+        <button id="ai-model-cancel" class="btn btn-copy" type="button">Anuluj</button>
+      </footer>
+    </div>
+  </div>
+
+  <div id="first-use-modal" class="modal" hidden aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="first-use-title">
+      <header class="modal-header">
+        <img src="assets/icon-192.png" alt="" width="48" height="48">
+        <div>
+          <h2 id="first-use-title">Witaj w Tapety Studio</h2>
+          <p>Marek Zettel · Cyfrowy Przyjaciel — krótka instrukcja przed startem</p>
+        </div>
+      </header>
+      <div class="modal-body">
+        <ol>
+          <li><strong>Uruchamianie:</strong> używaj skrótu na pulpicie lub skryptu <code>scripts/run-*</code> — aplikacja wymaga lokalnego serwera HTTP.</li>
+          <li><strong>Pierwsza instalacja:</strong> Windows → <code>scripts\setup-windows.bat</code>, macOS/Linux → <code>setup-*.sh</code>.</li>
+          <li><strong>Prompty:</strong> wybierz format 16:9 lub 9:16, szukaj, kopiuj lub modyfikuj z AI.</li>
+          <li><strong>Gemini:</strong> zainstaluj rozszerzenie <a href="https://chromewebstore.google.com/detail/gemini-url-prompt/kdbgjkfdooaiompgeckjbegnnccchmma" target="_blank" rel="noopener noreferrer">Gemini URL Prompt</a>.</li>
+          <li><strong>Zapis promptów:</strong> zmodyfikowane wersje możesz trzymać w darmowej aplikacji <a href="https://github.com/zetmar-collab/PrompBase-Python/releases/download/v2.4.0/PrompBase.exe" target="_blank" rel="noopener noreferrer">PrompBase</a>.</li>
+          <li><strong>PWA:</strong> w Chrome/Edge wybierz „Zainstaluj aplikację”, aby dodać ikonę na pulpit.</li>
+        </ol>
+        <p class="modal-note">Pełna instrukcja: plik <code>scripts/PIERWSZE-URUCHOMIENIE.txt</code></p>
+      </div>
+      <footer class="modal-footer">
+        <button id="first-use-close" class="btn btn-ai" type="button">Rozumiem, zaczynam</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

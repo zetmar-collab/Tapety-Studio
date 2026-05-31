@@ -1,0 +1,5 @@
+scripts/.server.pid
+scripts/.server.log
+.DS_Store
+Thumbs.db
+*.zip

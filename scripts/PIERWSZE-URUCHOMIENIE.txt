@@ -1,0 +1,49 @@
+Tapety Studio — Marek Zettel | Cyfrowy Przyjaciel
+=================================================
+
+PIERWSZE URUCHOMIENIE (przeczytaj przed startem)
+-------------------------------------------------
+
+1. WYMAGANIA
+   - Python 3 (zalecane) LUB Node.js — do lokalnego serwera HTTP
+   - Przeglądarka Chrome, Edge lub Firefox
+   - Połączenie z internetem (tylko przy „Modyfikuj z AI”)
+
+2. PIERWSZA INSTALACJA (jednorazowo)
+   Windows : kliknij  scripts\setup-windows.bat
+   macOS   : uruchom  ./scripts/setup-macos.sh
+   Linux   : uruchom  ./scripts/setup-linux.sh
+
+   Skrypt sprawdzi Python/Node, zapisze konfigurację serwera
+   i utworzy skrót na pulpicie.
+
+3. CODZIENNE URUCHAMIANIE
+   Windows : skrót „Tapety Studio” na pulpicie
+             LUB  scripts\run-windows.bat
+   macOS   : skrót „Tapety Studio.command”
+             LUB  ./scripts/run-macos.sh
+   Linux   : skrót „Tapety Studio”
+             LUB  ./scripts/run-linux.sh
+
+4. ADRES APLIKACJI
+   http://127.0.0.1:8088/index.html
+   (port można zmienić w pliku scripts\config.port)
+
+5. PWA — INSTALACJA JAK APLIKACJA
+   W Chrome/Edge: menu → „Zainstaluj Tapety Studio” / „Zainstaluj aplikację”
+
+6. GEMINI
+   Przed użyciem „Modyfikuj z AI” z modelem Gemini zainstaluj rozszerzenie:
+   Gemini URL Prompt (Chrome Web Store)
+   https://chromewebstore.google.com/detail/gemini-url-prompt/kdbgjkfdooaiompgeckjbegnnccchmma
+
+7. ZAPIS PROMPTÓW
+   Zmodyfikowane prompty możesz zapisać w darmowej aplikacji PrompBase:
+   https://github.com/zetmar-collab/PrompBase-Python/releases/download/v2.4.0/PrompBase.exe
+
+8. ROZWIĄZYWANIE PROBLEMÓW
+   - Pusta strona → uruchom skrypt run-* (serwer musi działać)
+   - Port zajęty → zmień numer w scripts\config.port i uruchom ponownie setup
+   - Brak Python → https://www.python.org/downloads/ (zaznacz „Add to PATH”)
+
+Marka: Marek Zettel · Cyfrowy Przyjaciel

@@ -1,0 +1,33 @@
+{
+  "name": "Tapety Studio - Marek Zettel. Cyfrowy Przyjaciel",
+  "short_name": "Tapety Studio",
+  "description": "250 gotowych promptów do generowania tapet 16:9 i 9:16 — marka osobista Marek Zettel / Cyfrowy Przyjaciel.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#e0f2fe",
+  "theme_color": "#0f4c81",
+  "lang": "pl",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
