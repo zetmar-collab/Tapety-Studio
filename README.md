@@ -1,5 +1,7 @@
 # Tapety Studio — Marek Zettel | Cyfrowy Przyjaciel
 
+**Wersja 2.0.0** · [Pobierz ZIP (release)](https://github.com/zetmar-collab/Tapety-Studio/releases/latest)
+
 PWA z 250 gotowymi promptami do generowania tapet AI (125× 16:9 desktop + 125× 9:16 telefon).
 
 ## Użyj online (bez instalacji)
