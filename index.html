@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="250 gotowych promptów do tapet AI — format 16:9 na desktop i 9:16 na telefon. Kopiuj, modyfikuj w AI, generuj tapety bez pisania od zera. Marek Zettel, Cyfrowy Przyjaciel.">
+  <meta name="theme-color" content="#0f4c81">
+  <meta name="author" content="Marek Zettel — Cyfrowy Przyjaciel">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:title" content="Tapety Studio — 250 promptów do tapet AI">
+  <meta property="og:description" content="Gotowe prompty 16:9 i 9:16. Kopiuj, dopasuj w AI, wklej do generatora grafiki.">
+  <meta property="og:image" content="assets/og-1200x630.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tapety Studio — 250 promptów do tapet AI">
+  <meta name="twitter:description" content="Gotowe prompty 16:9 i 9:16. Kopiuj, dopasuj w AI, wklej do generatora grafiki.">
+  <meta name="twitter:image" content="assets/og-1200x630.svg">
+
+  <title>Tapety Studio — 250 promptów do tapet AI | Marek Zettel</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Tapety Studio",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web, Windows, macOS, Linux",
+    "description": "250 gotowych promptów do generowania tapet AI w formatach 16:9 i 9:16.",
+    "author": {
+      "@type": "Person",
+      "name": "Marek Zettel"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "PLN"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <img class="brand-icon" src="assets/icon-192.png" alt="" width="64" height="64">
+        <div>
+          <h1>250 promptów do tapet AI — desktop 16:9 i telefon 9:16</h1>
+          <p class="hero-sub">Dla twórców, fotografów i osób korzystających z ChatGPT, Gemini lub generatorów obrazów. Bez pisania od zera.</p>
+        </div>
+      </div>
+
+      <p class="social-proof">250 promptów · Marek Zettel · Cyfrowy Przyjaciel · fotografia + automatyzacja AI</p>
+
+      <nav class="main-nav" aria-label="Menu główne">
+        <button id="menu-create-wallpaper" class="main-nav__btn main-nav__btn--primary" type="button">Stwórz tapetę</button>
+        <button id="menu-library" class="main-nav__btn" type="button">Biblioteka promptów</button>
+        <button id="menu-random" class="main-nav__btn" type="button">Wylosuj prompt</button>
+      </nav>
+
+      <div id="install-banner" class="install-banner">
+        <span>Zainstaluj Tapety Studio jako aplikację PWA — działa offline.</span>
+        <button id="install-btn" class="btn btn-ai" type="button">Zainstaluj aplikację</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="toolbar toolbar--sticky" aria-label="Wyszukiwarka i filtry">
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true"></span>
+        <input id="search-input" type="search" placeholder="Szukaj: anime, cyberpunk, gradient, natura..." autocomplete="off" aria-label="Szukaj promptów">
+      </div>
+
+      <div id="category-chips" class="category-chips" role="group" aria-label="Kategorie promptów"></div>
+
+      <div class="controls-row">
+        <div class="tabs" role="tablist" aria-label="Format tapety">
+          <button class="tab-btn active" data-tab="landscape_16_9" type="button" role="tab" aria-selected="true">16:9 Desktop</button>
+          <button class="tab-btn" data-tab="portrait_9_16" type="button" role="tab" aria-selected="false">9:16 Telefon</button>
+        </div>
+        <div id="stats" class="stats">Wczytywanie...</div>
+      </div>
+    </section>
+
+    <aside id="prompbase-banner" class="prompbase-banner" aria-label="PrompBase">
+      <div class="prompbase-banner__text">
+        <strong>Zapisuj najlepsze prompty po edycji w AI</strong>
+        <span>— darmowa aplikacja PrompBase na Windows.</span>
+      </div>
+      <div class="prompbase-banner__actions">
+        <a class="btn btn-primary" href="https://github.com/zetmar-collab/PrompBase-Python/releases/download/v2.4.0/PrompBase.exe" target="_blank" rel="noopener noreferrer" data-prompbase-link>Pobierz PrompBase</a>
+        <button id="prompbase-dismiss" class="btn btn-copy" type="button">Nie teraz</button>
+      </div>
+    </aside>
+
+    <section id="prompt-list" class="prompt-list" aria-live="polite" aria-label="Lista promptów">
+      <div class="empty-state">Ładowanie promptów...</div>
+    </section>
+
+    <div class="load-more-wrap">
+      <button id="load-more-btn" class="btn btn-copy load-more-btn" type="button" hidden>Pokaż więcej</button>
+    </div>
+
+    <section class="integrations" aria-label="Integracje i pomoc">
+      <details class="integrations-details">
+        <summary>Integracje, generatory obrazów i PrompBase</summary>
+        <div class="info-grid">
+          <article class="info-card">
+            <h2>PrompBase — zapisuj zmodyfikowane prompty</h2>
+            <p>
+              Po modyfikacji w AI zapisuj najlepsze wersje w darmowej aplikacji PrompBase.
+              <a href="https://github.com/zetmar-collab/PrompBase-Python/releases/download/v2.4.0/PrompBase.exe" target="_blank" rel="noopener noreferrer" data-prompbase-link>Pobierz PrompBase.exe (Windows, v2.4.0)</a>.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h2>Gemini — rozszerzenie Chrome</h2>
+            <p>
+              Przy modelu Gemini potrzebne jest rozszerzenie
+              <strong>Gemini URL Prompt</strong>:
+              <a href="https://chromewebstore.google.com/detail/gemini-url-prompt/kdbgjkfdooaiompgeckjbegnnccchmma" target="_blank" rel="noopener noreferrer">pobierz z Chrome Web Store</a>.
+            </p>
+          </article>
+
+          <article class="info-card info-card--wide">
+            <h2>Generatory obrazów (po skopiowaniu promptu)</h2>
+            <p>
+              Skopiuj prompt, potem wklej w:
+              <a href="https://copilot.microsoft.com/" target="_blank" rel="noopener noreferrer">Microsoft Copilot / Designer</a>,
+              <a href="https://app.leonardo.ai/" target="_blank" rel="noopener noreferrer">Leonardo.ai</a> lub
+              <a href="https://ideogram.ai/" target="_blank" rel="noopener noreferrer">Ideogram</a>.
+              Na każdej karcie promptu jest też przycisk <strong>Generator obrazu</strong> (kopiuje i otwiera wybrane narzędzie).
+            </p>
+          </article>
+
+          <article class="info-card info-card--wide">
+            <h2>Instalacja offline (PWA)</h2>
+            <p>
+              Windows: <code>scripts\setup-windows.bat</code> · macOS/Linux: <code>setup-*.sh</code> ·
+              pełna instrukcja: <a href="scripts/PIERWSZE-URUCHOMIENIE.txt">PIERWSZE-URUCHOMIENIE.txt</a>.
+            </p>
+          </article>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p class="site-footer__brand">Tapety Studio · Marek Zettel · Cyfrowy Przyjaciel</p>
+      <p class="site-footer__proof">125 promptów 16:9 + 125 promptów 9:16 · PWA offline</p>
+      <nav class="site-footer__nav" aria-label="Linki">
+        <a href="https://github.com/zetmar-collab" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://github.com/zetmar-collab/PrompBase-Python/releases/download/v2.4.0/PrompBase.exe" target="_blank" rel="noopener noreferrer" data-prompbase-link>PrompBase</a>
+        <a href="scripts/PIERWSZE-URUCHOMIENIE.txt">Instrukcja</a>
+      </nav>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="custom-wallpaper-modal" class="modal" hidden aria-hidden="true">
+    <div class="modal-backdrop" data-close-custom-modal></div>
+    <div class="modal-dialog modal-dialog--create" role="dialog" aria-modal="true" aria-labelledby="custom-wallpaper-title">
+      <header class="modal-header">
+        <img src="assets/icon-192.png" alt="" width="48" height="48">
+        <div>
+          <h2 id="custom-wallpaper-title">Stwórz tapetę</h2>
+          <p>Wybierz format i styl, opisz wizję — AI przygotuje prompt do generatora obrazu.</p>
+        </div>
+      </header>
+      <div class="modal-body custom-wallpaper">
+        <div class="custom-wallpaper__grid">
+          <fieldset class="option-group">
+            <legend>Format</legend>
+            <div class="option-row" role="group" aria-label="Format tapety">
+              <button type="button" class="option-btn active" data-custom-format="landscape_16_9" aria-pressed="true">16:9 Desktop</button>
+              <button type="button" class="option-btn" data-custom-format="portrait_9_16" aria-pressed="false">9:16 Telefon</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="option-group">
+            <legend>Styl</legend>
+            <div class="option-row" role="group" aria-label="Styl grafiki">
+              <button type="button" class="option-btn active" data-custom-style="realistic" aria-pressed="true">Realistyczne</button>
+              <button type="button" class="option-btn" data-custom-style="illustration" aria-pressed="false">Ilustracja</button>
+              <button type="button" class="option-btn" data-custom-style="anime" aria-pressed="false">Anime</button>
+            </div>
+          </fieldset>
+        </div>
+
+        <label class="custom-wallpaper__label" for="custom-description">Opisz, jak ma wyglądać tapeta</label>
+        <textarea
+          id="custom-description"
+          class="custom-wallpaper__textarea"
+          rows="5"
+          placeholder="Np. spokojne góry o wschodzie słońca, delikatna mgła, pastelowe niebo, bez ludzi i bez tekstu na obrazie…"
+          maxlength="1200"
+        ></textarea>
+        <p class="custom-wallpaper__hint">Minimum 10 znaków. Im więcej szczegółów, tym lepszy prompt od AI.</p>
+      </div>
+      <footer class="modal-footer modal-footer--split">
+        <button id="custom-wallpaper-cancel" class="btn btn-copy" type="button">Zamknij</button>
+        <button id="custom-send-ai" class="btn btn-ai" type="button">Wyślij do AI — utwórz prompt do obrazu</button>
+      </footer>
+    </div>
+  </div>
+
+  <div id="ai-model-modal" class="modal" hidden aria-hidden="true">
+    <div class="modal-backdrop" data-close-ai-modal></div>
+    <div class="modal-dialog modal-dialog--models" role="dialog" aria-modal="true" aria-labelledby="ai-model-title">
+      <header class="modal-header">
+        <div>
+          <h2 id="ai-model-title">Wybierz model AI</h2>
+          <p id="ai-model-subtitle">Pełny tekst trafi do schowka — potem otworzy się wybrany czat</p>
+        </div>
+      </header>
+      <div class="modal-body">
+        <label class="ai-skip-label">
+          <input id="ai-skip-modal" type="checkbox">
+          Zawsze otwieraj w ostatnio wybranym modelu (pomiń ten ekran)
+        </label>
+        <ul id="ai-model-list" class="ai-model-list"></ul>
+        <p class="modal-note">
+          Gemini:
+          <a href="https://chromewebstore.google.com/detail/gemini-url-prompt/kdbgjkfdooaiompgeckjbegnnccchmma" target="_blank" rel="noopener noreferrer">Gemini URL Prompt</a>.
+        </p>
+      </div>
+      <footer class="modal-footer">
+        <button id="ai-model-cancel" class="btn btn-copy" type="button">Anuluj</button>
+      </footer>
+    </div>
+  </div>
+
+  <div id="image-tool-modal" class="modal" hidden aria-hidden="true">
+    <div class="modal-backdrop" data-close-image-modal></div>
+    <div class="modal-dialog modal-dialog--models" role="dialog" aria-modal="true" aria-labelledby="image-tool-title">
+      <header class="modal-header">
+        <div>
+          <h2 id="image-tool-title">Generator obrazu</h2>
+          <p>Prompt zostanie skopiowany — wklej go na otwartej stronie</p>
+        </div>
+      </header>
+      <div class="modal-body">
+        <ul id="image-tool-list" class="ai-model-list"></ul>
+      </div>
+      <footer class="modal-footer">
+        <button id="image-tool-cancel" class="btn btn-copy" type="button">Anuluj</button>
+      </footer>
+    </div>
+  </div>
+
+  <div id="first-use-modal" class="modal" hidden aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="first-use-title">
+      <header class="modal-header">
+        <img src="assets/icon-192.png" alt="" width="48" height="48">
+        <div>
+          <h2 id="first-use-title">Witaj w Tapety Studio</h2>
+          <p>3 kroki do pierwszej tapety</p>
+        </div>
+      </header>
+      <div class="modal-body">
+        <ol class="onboarding-steps">
+          <li><strong>Stwórz tapetę</strong> — w menu głównym: format, styl (realistyczne / ilustracja / anime), opis i <em>Wyślij do AI</em>.</li>
+          <li><strong>Biblioteka 250 promptów</strong> — <em>Biblioteka promptów</em> w menu; zakładki <em>16:9</em> / <em>9:16</em>, kategorie i wyszukiwarka.</li>
+          <li><strong>Skopiuj lub dopasuj</strong> — <em>Kopiuj</em> wklejasz do generatora; <em>Modyfikuj z AI</em> kopiuje prompt ze schowka i otwiera ChatGPT, Qwen, Gemini itd. (wklej Ctrl+V, jeśli pole jest puste).</li>
+          <li><strong>Wygeneruj tapetę</strong> — wklej prompt w ulubionym narzędziu (Midjourney, Leonardo, Copilot…). Proporcje są już w tekście.</li>
+        </ol>
+        <details class="modal-advanced">
+          <summary>Instalacja offline, PWA i skrypty</summary>
+          <ul>
+            <li>Serwer lokalny: <code>scripts/run-*</code> lub setup w <code>scripts/</code>.</li>
+            <li>PWA: przycisk „Zainstaluj aplikację” w nagłówku (Chrome/Edge).</li>
+            <li>Zapis wersji: <a href="https://github.com/zetmar-collab/PrompBase-Python/releases/download/v2.4.0/PrompBase.exe" target="_blank" rel="noopener noreferrer" data-prompbase-link>PrompBase</a>.</li>
+          </ul>
+        </details>
+      </div>
+      <footer class="modal-footer">
+        <button id="first-use-close" class="btn btn-primary" type="button">Rozumiem, zaczynam</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

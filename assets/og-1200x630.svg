@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Tapety Studio">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0f2fe"/>
+      <stop offset="45%" stop-color="#f0f9ff"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f4c81"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="180" cy="120" r="220" fill="#38bdf8" opacity="0.25"/>
+  <circle cx="1050" cy="80" r="180" fill="#0ea5e9" opacity="0.18"/>
+  <rect x="80" y="80" width="1040" height="470" rx="32" fill="#ffffff" opacity="0.92" stroke="#bae6fd" stroke-width="2"/>
+  <rect x="120" y="140" width="88" height="88" rx="22" fill="url(#accent)"/>
+  <text x="168" y="198" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, system-ui, sans-serif" font-size="42" font-weight="700">TS</text>
+  <text x="230" y="175" fill="#0f4c81" font-family="Segoe UI, system-ui, sans-serif" font-size="52" font-weight="700">Tapety Studio</text>
+  <text x="230" y="220" fill="#475569" font-family="Segoe UI, system-ui, sans-serif" font-size="28">250 promptów do tapet AI · 16:9 i 9:16</text>
+  <text x="120" y="300" fill="#0f172a" font-family="Segoe UI, system-ui, sans-serif" font-size="36" font-weight="600">Kopiuj · Modyfikuj w AI · Generuj tapet</text>
+  <text x="120" y="360" fill="#475569" font-family="Segoe UI, system-ui, sans-serif" font-size="26">Marek Zettel · Cyfrowy Przyjaciel</text>
+  <rect x="120" y="400" width="360" height="56" rx="14" fill="url(#accent)"/>
+  <text x="300" y="438" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, system-ui, sans-serif" font-size="24" font-weight="600">tapety-studio</text>
+  <text x="120" y="520" fill="#0369a1" font-family="Segoe UI, system-ui, sans-serif" font-size="22">Desktop 125× 16:9  ·  Telefon 125× 9:16</text>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Tapety Studio">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f4c81"/>
+      <stop offset="55%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#e0f2fe"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <rect x="96" y="120" width="320" height="200" rx="24" fill="#f0f9ff" stroke="#0f4c81" stroke-width="10"/>
+  <rect x="176" y="344" width="160" height="48" rx="16" fill="#0f4c81"/>
+  <circle cx="160" cy="220" r="28" fill="#38bdf8" opacity="0.85"/>
+  <path d="M240 260 L360 180 L360 300 Z" fill="#0ea5e9" opacity="0.9"/>
+</svg>
