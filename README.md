@@ -4,11 +4,13 @@ PWA z 250 gotowymi promptami do generowania tapet AI (125× 16:9 desktop + 125×
 
 ## Użyj online (bez instalacji)
 
-Po włączeniu **GitHub Pages** w ustawieniach repozytorium (Settings → Pages → GitHub Actions) aplikacja jest dostępna pod adresem:
+Aplikacja działa w przeglądarce (GitHub Pages):
 
-`https://<twoja-nazwa-uzytkownika>.github.io/<nazwa-repozytorium>/`
+**https://zetmar-collab.github.io/Tapety-Studio/**
 
-Wtedy nie potrzebujesz lokalnego serwera HTTP — wystarczy przeglądarka.
+Nie potrzebujesz lokalnego serwera HTTP.
+
+Repozytorium: **https://github.com/zetmar-collab/Tapety-Studio**
 
 ## Szybki start (lokalnie)
 
